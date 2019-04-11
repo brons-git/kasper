@@ -1,0 +1,6 @@
+framework module Pods_KasperTests {
+  umbrella header "Pods-KasperTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

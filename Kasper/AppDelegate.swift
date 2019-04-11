@@ -7,15 +7,42 @@
 //
 
 import UIKit
+import AVKit
+import Firebase
+import FirebaseAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    // Variables
     var window: UIWindow?
 
-
+    // Application Did Finish Launching
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // Status Bar Style
+        UIApplication.shared.statusBarStyle = .lightContent
+        // Window Frame
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        // Include Firebase
+        FirebaseApp.configure()
+        
+        // Story Board
+        let storyboard =  UIStoryboard(name: "Main", bundle: nil)
+        
+        // User is Logged In
+        if Auth.auth().currentUser != nil{
+            let loggedInVC = storyboard.instantiateViewController(withIdentifier: "FeedVC")
+            self.window?.rootViewController = loggedInVC
+            print("LOGIN STATUS/User is logged in.")
+        }
+        // User ISN'T Logged In
+        else
+        {
+            let loggedOutVC = storyboard.instantiateViewController(withIdentifier: "MainVC")
+            self.window?.rootViewController = loggedOutVC
+            print("LOGIN STATUS/User is NOT logged in.")
+        }
         return true
     }
 

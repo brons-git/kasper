@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>142824349406-t17jhki91vgvb2lju55fnokh59eham2g.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.142824349406-t17jhki91vgvb2lju55fnokh59eham2g</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDoc_j1gQhQ5Ae7KZd-SQySFoLOs2n-fN0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>142824349406</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>kasper.89sx89u7221ae</string>
+	<key>PROJECT_ID</key>
+	<string>ksp-10e0kr3i</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ksp-10e0kr3i.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:142824349406:ios:29353e0819ad8f18</string>
+	<key>DATABASE_URL</key>
+	<string>https://ksp-10e0kr3i.firebaseio.com</string>
+</dict>
+</plist>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="messageCell" rowHeight="189" id="KGk-i7-Jjw" customClass="MessageVCTableViewCell" customModule="Kasper" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="315" height="189"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM" customClass="MessageVCTableViewCell" customModule="Kasper" customModuleProvider="target">
+                <rect key="frame" x="0.0" y="0.0" width="315" height="188.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sh1-RU-Nrv">
+                        <rect key="frame" x="20" y="13" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="tgr-H5-puj"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vk2-8g-Ryb">
+                        <rect key="frame" x="20" y="13" width="40" height="40"/>
+                        <state key="normal" image="ProPicBorder40x"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9G-XR-hxR">
+                        <rect key="frame" x="68" y="23" width="227" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="9S3-NH-72J"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.35942062320000001" green="0.97884285270000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="top" semanticContentAttribute="forceLeftToRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TextPost" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVc-yM-kNB">
+                        <rect key="frame" x="20" y="61" width="275" height="114"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="vk2-8g-Ryb" firstAttribute="leading" secondItem="Sh1-RU-Nrv" secondAttribute="leading" id="Ces-Ms-4o0"/>
+                    <constraint firstItem="eVc-yM-kNB" firstAttribute="top" secondItem="b9G-XR-hxR" secondAttribute="bottom" constant="17" id="Ek4-DW-Byh"/>
+                    <constraint firstItem="vk2-8g-Ryb" firstAttribute="leading" secondItem="eVc-yM-kNB" secondAttribute="leading" id="FFc-h7-BKs"/>
+                    <constraint firstItem="eVc-yM-kNB" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="JEX-85-2Us"/>
+                    <constraint firstItem="Sh1-RU-Nrv" firstAttribute="top" secondItem="vk2-8g-Ryb" secondAttribute="top" id="QKn-Au-9M2"/>
+                    <constraint firstItem="b9G-XR-hxR" firstAttribute="leading" secondItem="Sh1-RU-Nrv" secondAttribute="trailing" constant="8" symbolic="YES" id="Rr0-Mg-ddp"/>
+                    <constraint firstItem="eVc-yM-kNB" firstAttribute="top" secondItem="Sh1-RU-Nrv" secondAttribute="bottom" constant="8" symbolic="YES" id="WYB-7f-y62"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="eVc-yM-kNB" secondAttribute="bottom" constant="3" id="Yqn-bY-836"/>
+                    <constraint firstItem="eVc-yM-kNB" firstAttribute="top" secondItem="vk2-8g-Ryb" secondAttribute="bottom" constant="8" symbolic="YES" id="Ztr-yg-cjb"/>
+                    <constraint firstItem="Sh1-RU-Nrv" firstAttribute="centerY" secondItem="b9G-XR-hxR" secondAttribute="centerY" id="g7X-iP-rlI"/>
+                    <constraint firstItem="b9G-XR-hxR" firstAttribute="leading" secondItem="vk2-8g-Ryb" secondAttribute="trailing" constant="8" symbolic="YES" id="m2n-W4-DZv"/>
+                    <constraint firstItem="vk2-8g-Ryb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="4" id="oCW-ek-DSd"/>
+                    <constraint firstItem="b9G-XR-hxR" firstAttribute="trailing" secondItem="eVc-yM-kNB" secondAttribute="trailing" id="y8b-HL-klg"/>
+                    <constraint firstItem="Sh1-RU-Nrv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="zYb-Mb-VsD"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="cellMessage" destination="eVc-yM-kNB" id="EMb-M2-aR1"/>
+                <outlet property="cellProPic" destination="Sh1-RU-Nrv" id="RGB-ZR-qyU"/>
+                <outlet property="cellUsername" destination="b9G-XR-hxR" id="5bt-Gu-elz"/>
+            </connections>
+            <point key="canvasLocation" x="26.5" y="22.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ProPicBorder40x" width="42" height="42"/>
+    </resources>
+</document>
