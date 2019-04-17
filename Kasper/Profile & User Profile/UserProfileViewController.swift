@@ -338,8 +338,9 @@ class UserProfileViewController: UIViewController {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                 let dateString = formatter.string(from: date)
-                let notifValues = ["username": self.myUsername, "description": "Added you as their friend.", "id": self.myId]
-                let dateNotifValues = [dateString: notifValues]
+                let keyValue = dateString + self.myId
+                let notifValues = ["username": self.myUsername, "description": "Added you as their friend.", "id": self.myId, "timestamp": dateString]
+                let dateNotifValues = [keyValue: notifValues]
                 Database.database().reference().child("notifications").child(self.id).updateChildValues(dateNotifValues, withCompletionBlock: { (err, ref) in
                     
                     
