@@ -40,7 +40,6 @@ class MessagesViewController: UIViewController {
         super.viewDidLoad()
         banCheck()
         setupProPic()
-        fetchRecentMsgs()
         fetchChanges()
         fetchRemovals()
         currentFirstname()
@@ -52,6 +51,13 @@ class MessagesViewController: UIViewController {
         tableView.allowsSelection = true
         tableView.isEditing = false
         tableView.isUserInteractionEnabled = true
+    }
+    
+    // View Did Appear
+    override func viewDidAppear(_ animated: Bool){
+        // reset recentconvos data model
+        self.recentconvos.removeAll()
+        fetchRecentMsgs()
     }
     
     // Check if user is banned
@@ -200,7 +206,6 @@ class MessagesViewController: UIViewController {
     // Fetch Changes
     func fetchChanges() {
         Database.database().reference().child("recent-msgs").child(uid!).observe(.childChanged) { (snapshot: DataSnapshot) in
-            //self.tableView.reloadData()??????
         }
     }
     
