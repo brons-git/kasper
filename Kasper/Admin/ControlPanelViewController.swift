@@ -58,9 +58,9 @@ class ControlPanelViewController: UIViewController, UITextFieldDelegate {
                         }
                     // Command : info (show info about user)
                     )} else if command == "info" {
-                        self.infoLabel.text = "uid: " + uuid! + " is now a guest!"
+                        self.infoLabel.text = "uid: " + uuid!
                         self.infoLabel.isHidden = false
-                        
+        
                     // Invalid Command
                     } else {
                         self.infoLabel.text = "invalid command"
