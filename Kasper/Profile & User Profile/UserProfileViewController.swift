@@ -189,25 +189,29 @@ class UserProfileViewController: UIViewController {
                 let dateData = dict["date"] as! String
                 let textPostData = dict["textPost"] as! String
                 let imagePostData = dict["imagePost"] as! String
-                let usernameData = dict["username"] as! String
                 
-                // Fetch Rank using existing "idData" from above
-                Database.database().reference().child("users").child(idData).child("rank").observeSingleEvent(of: .value, with: { (snapshot) in
-                    let rankData = snapshot.value as? String
-                    
-                    // Fetch ProPicRef using existing "idData" from above
-                    Database.database().reference().child("users").child(idData).child("propicref").observeSingleEvent(of: .value, with: { (snapshot) in
-                        let propicrefData = snapshot.value as? String
+                // Fetch Username using existing "idData" from above
+                Database.database().reference().child("users").child(idData).child("username").observeSingleEvent(of: .value, with: { (snapshot) in
+                    let usernameData = snapshot.value as? String
+                
+                    // Fetch Rank using existing "idData" from above
+                    Database.database().reference().child("users").child(idData).child("rank").observeSingleEvent(of: .value, with: { (snapshot) in
+                        let rankData = snapshot.value as? String
                         
-                        // Add data to Post.swift model
-                        let postinfo = Post(postTypeString: postType, idString: idData, dateString: dateData, textPostString: textPostData, imagePostString: imagePostData, usernameString: usernameData, rankString: rankData!, propicrefString: propicrefData!)
-                        self.posts.append(postinfo)
-                        
-                        // Reload Table with Data
-                        self.tableView.reloadData()
-                    }
+                        // Fetch ProPicRef using existing "idData" from above
+                        Database.database().reference().child("users").child(idData).child("propicref").observeSingleEvent(of: .value, with: { (snapshot) in
+                            let propicrefData = snapshot.value as? String
+                            
+                            // Add data to Post.swift model
+                            let postinfo = Post(postTypeString: postType, idString: idData, dateString: dateData, textPostString: textPostData, imagePostString: imagePostData, usernameString: usernameData!, rankString: rankData!, propicrefString: propicrefData!)
+                            self.posts.append(postinfo)
+                            
+                            // Reload Table with Data
+                            self.tableView.reloadData()
+                        }
                     )}
                 )}
+            )}
         }
     }
     
@@ -338,8 +342,9 @@ class UserProfileViewController: UIViewController {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                 let dateString = formatter.string(from: date)
-                let notifValues = ["username": self.myUsername, "description": "Added you as their friend.", "id": self.myId]
-                let dateNotifValues = [dateString: notifValues]
+                let keyValue = dateString + self.myId
+                let notifValues = ["username": self.myUsername, "description": "Added you as their friend.", "id": self.myId, "timestamp": dateString]
+                let dateNotifValues = [keyValue: notifValues]
                 Database.database().reference().child("notifications").child(self.id).updateChildValues(dateNotifValues, withCompletionBlock: { (err, ref) in
                     
                     

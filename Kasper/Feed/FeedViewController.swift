@@ -80,23 +80,27 @@ class FeedViewController: UIViewController {
                     let dateData = dict["date"] as! String
                     let textPostData = dict["textPost"] as! String
                     let imagePostData = dict["imagePost"] as! String
-                    let usernameData = dict["username"] as! String
                     
-                    // Fetch Rank using existing "idData" from above
-                    Database.database().reference().child("users").child(idData).child("rank").observeSingleEvent(of: .value, with: { (snapshot) in
-                        let rankData = snapshot.value as? String
-                        
-                        // Fetch ProPicRef using existing "idData" from above
-                        Database.database().reference().child("users").child(idData).child("propicref").observeSingleEvent(of: .value, with: { (snapshot) in
-                            let propicrefData = snapshot.value as? String
-                        
-                            // Add data to Post.swift model
-                            let postinfo = Post(postTypeString: postType, idString: idData, dateString: dateData, textPostString: textPostData, imagePostString: imagePostData, usernameString: usernameData, rankString: rankData!, propicrefString: propicrefData!)
-                            self.posts.append(postinfo)
+                    // Fetch Username using existing "idData" from above
+                    Database.database().reference().child("users").child(idData).child("username").observeSingleEvent(of: .value, with: { (snapshot) in
+                        let usernameData = snapshot.value as? String
+                    
+                        // Fetch Rank using existing "idData" from above
+                        Database.database().reference().child("users").child(idData).child("rank").observeSingleEvent(of: .value, with: { (snapshot) in
+                            let rankData = snapshot.value as? String
                             
-                            // Reload Table with Data
-                            self.tableView.reloadData()
-                    }
+                            // Fetch ProPicRef using existing "idData" from above
+                            Database.database().reference().child("users").child(idData).child("propicref").observeSingleEvent(of: .value, with: { (snapshot) in
+                                let propicrefData = snapshot.value as? String
+                            
+                                // Add data to Post.swift model
+                                let postinfo = Post(postTypeString: postType, idString: idData, dateString: dateData, textPostString: textPostData, imagePostString: imagePostData, usernameString: usernameData!, rankString: rankData!, propicrefString: propicrefData!)
+                                self.posts.append(postinfo)
+                                
+                                // Reload Table with Data
+                                self.tableView.reloadData()
+                        }
+                    )}
                 )}
             )}
         }
