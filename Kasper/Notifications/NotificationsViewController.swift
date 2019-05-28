@@ -223,11 +223,13 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
         bgColorView.backgroundColor = UIColor.black
         cell.selectedBackgroundView = bgColorView
         
-        // ADMIN
+        // Add @ Before Username
+        cell.usernameLabel.text = "@" + notificationsRe[indexPath.row].username
+        
+        // ADMIN cell
         if notificationsRe[indexPath.row].rank == "admin" {
             cell.usernameLabel.textColor = UIColor.red
             cell.descriptionLabel.textColor = UIColor.red
-            cell.usernameLabel.text = notificationsRe[indexPath.row].username
             cell.descriptionLabel.text = notificationsRe[indexPath.row].description
             let proPicRefe = notificationsRe[indexPath.row].propicref
             let proPicUrlRefe:NSURL? = NSURL(string: proPicRefe)
@@ -237,10 +239,10 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.proPic.clipsToBounds = true
             }
         }
+        // User Cell
         else {
             cell.usernameLabel.textColor = UIColor.cyan
             cell.descriptionLabel.textColor = UIColor.gray
-            cell.usernameLabel.text = "@" + notificationsRe[indexPath.row].username
             cell.descriptionLabel.text = notificationsRe[indexPath.row].description
             let proPicRefe = notificationsRe[indexPath.row].propicref
             let proPicUrlRefe:NSURL? = NSURL(string: proPicRefe)

@@ -89,16 +89,20 @@ class UserProfileViewController: UIViewController {
             fullnameLabel.text = (fullname)
         }
         
+        // Add @ Before Username
+        usernameLabel.text = ("@" + username)
+        
         // ADMIN
         if rank == "admin" {
-            self.usernameLabel.textColor = UIColor.red
-            self.fullnameLabel.textColor = UIColor.red
-            usernameLabel.text = (username)
+            //self.usernameLabel.textColor = UIColor.red
+            //self.fullnameLabel.textColor = UIColor.red
+            self.usernameLabel.textColor = UIColor.cyan
+            self.fullnameLabel.textColor = UIColor.cyan
         }
+        // User
         else {
             self.usernameLabel.textColor = UIColor.cyan
             self.fullnameLabel.textColor = UIColor.cyan
-            usernameLabel.text = ("@" + username)
         }
     }
     
@@ -372,14 +376,17 @@ extension UserProfileViewController: UITableViewDataSource {
         if permission == "granted" {
             let postsRe = Array(posts.reversed())
             
-            // ADMIN
+            // Add @ Before Username
+            cell.cellUsernameLabel.text = "@" + postsRe[indexPath.row].username
+            
+            // ADMIN Cell
             if postsRe[indexPath.row].rank == "admin" {
-                cell.cellUsernameLabel.textColor = UIColor.red
-                cell.cellUsernameLabel.text = postsRe[indexPath.row].username
+                //cell.cellUsernameLabel.textColor = UIColor.red
+                cell.cellUsernameLabel.textColor = UIColor.cyan
             }
+            // User Cell
             else {
                 cell.cellUsernameLabel.textColor = UIColor.cyan
-                cell.cellUsernameLabel.text = "@" + postsRe[indexPath.row].username
             }
             
             // Cell Data
@@ -400,37 +407,6 @@ extension UserProfileViewController: UITableViewDataSource {
             print("YOU DONT HAVE PERMISSION TO VIEW POSTS")
             cell.isHidden = true
         }
-        
-        
-        
-        
-        
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath) as! PhotoTableViewCell
-//        let postsRe = Array(posts.reversed())
-//
-//        // ADMIN
-//        if postsRe[indexPath.row].rank == "admin" {
-//            cell.cellUsernameLabel.textColor = UIColor.red
-//            cell.cellUsernameLabel.text = postsRe[indexPath.row].username
-//        }
-//        else {
-//            cell.cellUsernameLabel.textColor = UIColor.cyan
-//            cell.cellUsernameLabel.text = "@" + postsRe[indexPath.row].username
-//        }
-//
-//        // Cell Data
-//        let proPicRefe = postsRe[indexPath.row].propicref
-//        let proPicUrlRefe:NSURL? = NSURL(string: proPicRefe)
-//        if let proPicUrl = proPicUrlRefe as URL? {
-//            cell.cellProfPic.sd_setImage(with: proPicUrl)
-//            cell.cellProfPic.layer.cornerRadius = 20.0
-//            cell.cellProfPic.clipsToBounds = true
-//            let imagePostPicRefe = postsRe[indexPath.row].imagePost
-//            let imagePostPicUrlRefe:NSURL? = NSURL(string: imagePostPicRefe)
-//            if let imagePostPicUrl = imagePostPicUrlRefe as URL? {
-//                cell.cellPostPhoto.sd_setImage(with: imagePostPicUrl)
-//            }
-//        }
         return cell
     }
 }

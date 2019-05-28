@@ -80,16 +80,20 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 let username = snapshot.value as? String
                 self.usernameLabel.isHidden = false
                 
+                // Add @ Before Username
+                self.usernameLabel.text = "@" + username!
+                
                 // ADMIN
                 if rank == "admin" {
-                    self.usernameLabel.textColor = UIColor.red
-                    self.fullnameLabel.textColor = UIColor.red
-                    self.usernameLabel.text = username
+                    //self.usernameLabel.textColor = UIColor.red
+                    //self.fullnameLabel.textColor = UIColor.red
+                    self.usernameLabel.textColor = UIColor.cyan
+                    self.fullnameLabel.textColor = UIColor.cyan
                 }
+                // User
                 else {
                     self.usernameLabel.textColor = UIColor.cyan
                     self.fullnameLabel.textColor = UIColor.cyan
-                    self.usernameLabel.text = "@" + username!
                 }
             })
         })
@@ -235,14 +239,17 @@ extension ProfileViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath) as! PhotoTableViewCell
         let postsRe = Array(posts.reversed())
         
-        // ADMIN
+        // Add @ Before Username
+        cell.cellUsernameLabel.text = "@" + postsRe[indexPath.row].username
+        
+        // ADMIN Cell
         if postsRe[indexPath.row].rank == "admin" {
-            cell.cellUsernameLabel.textColor = UIColor.red
-            cell.cellUsernameLabel.text = postsRe[indexPath.row].username
+            //cell.cellUsernameLabel.textColor = UIColor.red
+            cell.cellUsernameLabel.textColor = UIColor.cyan
         }
+        // User Cell
         else {
             cell.cellUsernameLabel.textColor = UIColor.cyan
-            cell.cellUsernameLabel.text = "@" + postsRe[indexPath.row].username
         }
         
         // Cell Data

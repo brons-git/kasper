@@ -56,7 +56,8 @@ class ConversationViewController: UIViewController {
             print(snapshot)
             let rank = snapshot.value as? String
             if rank == "admin" {
-                self.firstnameLabel.textColor = UIColor.red
+                //self.firstnameLabel.textColor = UIColor.red
+                self.firstnameLabel.textColor = UIColor.cyan
             } else {
                 self.firstnameLabel.textColor = UIColor.cyan
             }

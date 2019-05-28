@@ -199,14 +199,17 @@ extension FeedViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath) as! PhotoTableViewCell
         let postsRe = Array(self.posts.reversed())
         
-        // ADMIN
+        // Add @ Before Username
+        cell.cellUsernameLabel.text = "@" + postsRe[indexPath.row].username
+        
+        // ADMIN Cell
         if postsRe[indexPath.row].rank == "admin" {
-            cell.cellUsernameLabel.textColor = UIColor.red
-            cell.cellUsernameLabel.text = postsRe[indexPath.row].username
+            //cell.cellUsernameLabel.textColor = UIColor.red
+            cell.cellUsernameLabel.textColor = UIColor.cyan
         }
+        // User Cell
         else {
             cell.cellUsernameLabel.textColor = UIColor.cyan
-            cell.cellUsernameLabel.text = "@" + postsRe[indexPath.row].username
         }
         
         // Cell Data

@@ -294,8 +294,10 @@ extension MessagesViewController: UITableViewDelegate, UITableViewDataSource {
         
         // ADMIN
         if recentconvos[indexPath.row].rank == "admin" {
-            cell.cellName.textColor = UIColor.red
-            cell.cellMessage.textColor = UIColor.red
+            //cell.cellName.textColor = UIColor.red
+            //cell.cellMessage.textColor = UIColor.red
+            cell.cellName.textColor = UIColor.cyan
+            cell.cellMessage.textColor = UIColor.gray
         }
         else {
             cell.cellName.textColor = UIColor.cyan

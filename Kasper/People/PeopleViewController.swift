@@ -209,16 +209,20 @@ extension PeopleViewController: UITableViewDelegate, UITableViewDataSource {
         bgColorView.backgroundColor = UIColor.black
         cell.selectedBackgroundView = bgColorView
         
-        // ADMIN
+        // Add @ Before Username
+        cell.cellUsername.text = "@" + displayedUsers[indexPath.row].username
+        
+        // ADMIN Cell
         if displayedUsers[indexPath.row].rank == "admin" {
-            cell.cellUsername.textColor = UIColor.red
-            cell.cellFullname.textColor = UIColor.red
-            cell.cellUsername.text = displayedUsers[indexPath.row].username
+            //cell.cellUsername.textColor = UIColor.red
+            //cell.cellFullname.textColor = UIColor.red
+            cell.cellUsername.textColor = UIColor.cyan
+            cell.cellFullname.textColor = UIColor.gray
         }
+        // User Cell
         else {
             cell.cellUsername.textColor = UIColor.cyan
             cell.cellFullname.textColor = UIColor.gray
-            cell.cellUsername.text = "@" + displayedUsers[indexPath.row].username
         }
 
         // Cell Data
