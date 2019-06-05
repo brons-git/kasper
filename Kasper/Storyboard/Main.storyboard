@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lh2-jk-Fg8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lh2-jk-Fg8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -349,7 +349,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ItD-tf-LOD">
                                 <rect key="frame" x="247" y="627" width="40" height="40"/>
-                                <state key="normal" image="MapBTN">
+                                <state key="normal" image="SelectedNotificationsBTN">
                                     <color key="titleColor" red="0.35942062320000001" green="0.97884285270000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                             </button>
@@ -517,7 +517,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gVO-Ev-bpz">
                                 <rect key="frame" x="247" y="627" width="40" height="40"/>
-                                <state key="normal" image="GlobalChatBTN">
+                                <state key="normal" image="NotificationsBTN">
                                     <color key="titleColor" red="0.35942062320000001" green="0.97884285270000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
@@ -680,7 +680,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgH-7r-ocm">
                                 <rect key="frame" x="247" y="627" width="40" height="40"/>
-                                <state key="normal" image="GlobalChatBTN">
+                                <state key="normal" image="NotificationsBTN">
                                     <color key="titleColor" red="0.35942062320000001" green="0.97884285270000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
@@ -1318,7 +1318,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xdr-1l-zyl">
                                 <rect key="frame" x="247" y="627" width="40" height="40"/>
-                                <state key="normal" image="GlobalChatBTN">
+                                <state key="normal" image="NotificationsBTN">
                                     <color key="titleColor" red="0.35942062320000001" green="0.97884285270000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
@@ -3024,7 +3024,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELO-0z-tAG">
                                 <rect key="frame" x="255" y="627" width="40" height="40"/>
-                                <state key="normal" image="GlobalChatBTN"/>
+                                <state key="normal" image="NotificationsBTN"/>
                                 <connections>
                                     <action selector="notificationsTabButtonTapped:" destination="8TD-HR-DJO" eventType="touchUpInside" id="jC4-aR-jWj"/>
                                 </connections>
@@ -3116,23 +3116,24 @@
         <image name="GlobalChatBTN" width="40" height="40"/>
         <image name="LogInButton" width="263" height="64"/>
         <image name="LogOutButton" width="263" height="64"/>
-        <image name="MapBTN" width="40" height="40"/>
         <image name="MessagesBTN" width="40" height="40"/>
         <image name="NewsFeedBTN" width="40" height="40"/>
+        <image name="NotificationsBTN" width="40" height="40"/>
         <image name="PCLogo" width="512" height="512"/>
         <image name="PeopleBTN" width="40" height="40"/>
         <image name="PostButton" width="263" height="64"/>
         <image name="ProPicBorder120x" width="122" height="122"/>
         <image name="ProPicBorder40x" width="42" height="42"/>
-        <image name="Profile Pic Placeholder" width="128" height="128"/>
+        <image name="Profile Pic Placeholder" width="384" height="384"/>
         <image name="RecoverButton" width="263" height="64"/>
         <image name="SaveImgBTN" width="256" height="256"/>
         <image name="SelectedMessagesBTN" width="40" height="40"/>
         <image name="SelectedNewsFeedBTN" width="40" height="40"/>
+        <image name="SelectedNotificationsBTN" width="40" height="40"/>
         <image name="SelectedPeopleBTN" width="40" height="40"/>
         <image name="SendBTN" width="256" height="256"/>
         <image name="SignUpButton" width="263" height="64"/>
         <image name="TakePicButton" width="83" height="83"/>
-        <image name="default-cover-photo" width="375" height="125"/>
+        <image name="default-cover-photo" width="750" height="250"/>
     </resources>
 </document>
