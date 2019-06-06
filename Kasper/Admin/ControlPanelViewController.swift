@@ -26,7 +26,15 @@ class ControlPanelViewController: UIViewController, UITextFieldDelegate {
 
     }
     
-    // Process Command
+    // ADMINISTATOR COMMANDS...
+    // ------------------------
+    // ban
+    // sban
+    // mute
+    // smute
+    // guest
+    // info
+    // ------------------------
     @IBAction func commandButtonTapped(_ sender: Any) {
         if userInput.text != "" {
             let user = userInput.text?.lowercased()
@@ -41,9 +49,25 @@ class ControlPanelViewController: UIViewController, UITextFieldDelegate {
                         Database.database().reference().child("users").child(uuid!).updateChildValues(updateValues, withCompletionBlock: { (err, ref) in
                             self.infoLabel.text = "uid: " + uuid! + " has been banned!"
                             self.infoLabel.isHidden = false
+                            // Display notification globally
+                        }
+                    // Command : sban (Silently Ban Users Account)
+                    )} else if command == "sban" {
+                        let updateValues = ["rank": "banned"] as [String : AnyObject]
+                        Database.database().reference().child("users").child(uuid!).updateChildValues(updateValues, withCompletionBlock: { (err, ref) in
+                            self.infoLabel.text = "uid: " + uuid! + " has been banned!"
+                            self.infoLabel.isHidden = false
                         }
                     // Command : mute (Mute Users Account)
                     )} else if command == "mute" {
+                        let updateValues = ["rank": "muted"] as [String : AnyObject]
+                        Database.database().reference().child("users").child(uuid!).updateChildValues(updateValues, withCompletionBlock: { (err, ref) in
+                            self.infoLabel.text = "uid: " + uuid! + " has been muted!"
+                            self.infoLabel.isHidden = false
+                            // Display notification globally
+                        }
+                    // Command : smute (Silently Mute Users Account)
+                    )} else if command == "smute" {
                         let updateValues = ["rank": "muted"] as [String : AnyObject]
                         Database.database().reference().child("users").child(uuid!).updateChildValues(updateValues, withCompletionBlock: { (err, ref) in
                             self.infoLabel.text = "uid: " + uuid! + " has been muted!"
