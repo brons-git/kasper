@@ -24,6 +24,9 @@ class FeedViewController: UIViewController {
     var notifications = [Notifications]()
     var recentconvos = [RecentConvo]()
     
+    // Refresher
+    var refresher: UIRefreshControl!
+    
     // Constants
     let uid = Auth.auth().currentUser?.uid
     
@@ -31,6 +34,15 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        
+        // Refresher
+        refresher = UIRefreshControl()
+        refresher.tintColor = UIColor.cyan
+        refresher.attributedTitle = NSAttributedString(string: "refreshing...")
+        refresher.addTarget(self, action: #selector(FeedViewController.refresh), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refresher)
+        
+        // Func calls
         banCheck()
         setupProPic()
         fetchPosts()
@@ -195,6 +207,19 @@ extension FeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
+    
+    // Refresher
+    @objc func refresh()
+    {
+        print("WORKING")
+        print("WORKING")
+        print("WORKING")
+        print("WORKING")
+        print("WORKING")
+        refresher.endRefreshing()
+        tableView.reloadData()
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath) as! PhotoTableViewCell
         let postsRe = Array(self.posts.reversed())
