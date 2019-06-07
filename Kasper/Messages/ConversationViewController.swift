@@ -55,9 +55,8 @@ class ConversationViewController: UIViewController {
         Database.database().reference().child("users").child(self.id).child("rank").observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot)
             let rank = snapshot.value as? String
-            if rank == "admin" {
-                //self.firstnameLabel.textColor = UIColor.red
-                self.firstnameLabel.textColor = UIColor.cyan
+            if rank == "redadmin" {
+                self.firstnameLabel.textColor = UIColor.red
             } else {
                 self.firstnameLabel.textColor = UIColor.cyan
             }

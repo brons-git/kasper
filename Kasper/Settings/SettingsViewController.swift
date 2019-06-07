@@ -48,11 +48,11 @@ class SettingsViewController: UIViewController {
         Database.database().reference().child("users").child(uid!).child("rank").observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot)
             let rank = snapshot.value as? String
-            if rank == "admin" {
+            if (rank == "admin" || rank == "redadmin")  {
                 self.adminBtn.isHidden = false
                 self.adminBtn.isEnabled = true
             }
-            if rank != "admin" {
+            else {
                 self.adminBtn.isHidden = true
                 self.adminBtn.isEnabled = false
             }

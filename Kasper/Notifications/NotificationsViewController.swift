@@ -249,7 +249,7 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
         cell.usernameLabel.text = "@" + notificationsRe[indexPath.row].username
         
         // ADMIN cell
-        if notificationsRe[indexPath.row].rank == "admin" {
+        if notificationsRe[indexPath.row].rank == "redadmin" {
             cell.usernameLabel.textColor = UIColor.red
             cell.descriptionLabel.textColor = UIColor.red
             cell.descriptionLabel.text = notificationsRe[indexPath.row].description

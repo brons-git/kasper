@@ -93,11 +93,9 @@ class UserProfileViewController: UIViewController {
         usernameLabel.text = ("@" + username)
         
         // ADMIN
-        if rank == "admin" {
-            //self.usernameLabel.textColor = UIColor.red
-            //self.fullnameLabel.textColor = UIColor.red
-            self.usernameLabel.textColor = UIColor.cyan
-            self.fullnameLabel.textColor = UIColor.cyan
+        if rank == "redadmin" {
+            self.usernameLabel.textColor = UIColor.red
+            self.fullnameLabel.textColor = UIColor.red
         }
         // User
         else {
@@ -380,9 +378,8 @@ extension UserProfileViewController: UITableViewDataSource {
             cell.cellUsernameLabel.text = "@" + postsRe[indexPath.row].username
             
             // ADMIN Cell
-            if postsRe[indexPath.row].rank == "admin" {
-                //cell.cellUsernameLabel.textColor = UIColor.red
-                cell.cellUsernameLabel.textColor = UIColor.cyan
+            if postsRe[indexPath.row].rank == "redadmin" {
+                cell.cellUsernameLabel.textColor = UIColor.red
             }
             // User Cell
             else {
