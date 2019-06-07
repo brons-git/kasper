@@ -3129,7 +3129,7 @@
         <image name="MessagesBTN" width="40" height="40"/>
         <image name="NewsFeedBTN" width="40" height="40"/>
         <image name="NotificationsBTN" width="40" height="40"/>
-        <image name="PCLogo" width="512" height="512"/>
+        <image name="PCLogo" width="300" height="300"/>
         <image name="PeopleBTN" width="40" height="40"/>
         <image name="PostButton" width="263" height="64"/>
         <image name="ProPicBorder120x" width="122" height="122"/>
