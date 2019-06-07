@@ -27,6 +27,9 @@ class PeopleViewController: UIViewController, UISearchBarDelegate {
     // Search Bar
     var displayedUsers = [User]()
     
+    // Refresher
+    var refresher: UIRefreshControl!
+    
     // Constants
     let uid = Auth.auth().currentUser?.uid
     
@@ -54,6 +57,13 @@ class PeopleViewController: UIViewController, UISearchBarDelegate {
         tableView.allowsSelection = true
         tableView.isEditing = false
         tableView.isUserInteractionEnabled = true
+        
+        // Refresher
+        refresher = UIRefreshControl()
+        refresher.tintColor = UIColor.cyan
+        refresher.attributedTitle = NSAttributedString(string: "refreshing...")
+        refresher.addTarget(self, action: #selector(FeedViewController.refresh), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refresher)
     }
     
     // Check if user is banned
@@ -198,6 +208,18 @@ class PeopleViewController: UIViewController, UISearchBarDelegate {
 extension PeopleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return displayedUsers.count
+    }
+    
+    // Refresher
+    @objc func refresh()
+    {
+        print("WORKING")
+        print("WORKING")
+        print("WORKING")
+        print("WORKING")
+        print("WORKING")
+        refresher.endRefreshing()
+        tableView.reloadData()
     }
     
     // Table

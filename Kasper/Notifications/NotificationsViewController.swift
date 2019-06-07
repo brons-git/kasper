@@ -21,6 +21,9 @@ class NotificationsViewController: UIViewController {
     var notifications = [Notifications]()
     var recentconvos = [RecentConvo]()
     
+    // Refresher
+    var refresher: UIRefreshControl!
+    
     // Constants
     let uid = Auth.auth().currentUser?.uid
     
@@ -39,6 +42,13 @@ class NotificationsViewController: UIViewController {
         tableView.allowsSelection = true
         tableView.isEditing = false
         tableView.isUserInteractionEnabled = true
+        
+        // Refresher
+        refresher = UIRefreshControl()
+        refresher.tintColor = UIColor.cyan
+        refresher.attributedTitle = NSAttributedString(string: "refreshing...")
+        refresher.addTarget(self, action: #selector(FeedViewController.refresh), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refresher)
     }
     
     // Check if user is banned
@@ -209,6 +219,18 @@ class NotificationsViewController: UIViewController {
 extension NotificationsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count
+    }
+    
+    // Refresher
+    @objc func refresh()
+    {
+        print("WORKING")
+        print("WORKING")
+        print("WORKING")
+        print("WORKING")
+        print("WORKING")
+        refresher.endRefreshing()
+        tableView.reloadData()
     }
     
     // Table
