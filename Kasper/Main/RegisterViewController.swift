@@ -272,23 +272,18 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIImagePick
                                 self.describeInfoInvalidLabel.isHidden = true
                                 let userxid = [username: uid]
                                 Database.database().reference().child("uids").updateChildValues(userxid, withCompletionBlock: { (err, ref) in
-                                    
-                                    // Create Friend List for User
-                                    let newFriendList = ["*": "default-friend"]
-                                    Database.database().reference().child("friend-lists").child(uid).updateChildValues(newFriendList, withCompletionBlock: { (err, ref) in
                                         
-                                        if let err = err {
-                                            print("Failed to save user info into db:", err)
-                                            return
-                                        } else {
-                                            print("Successfully saved user info to db")
+                                    if let err = err {
+                                        print("Failed to save user info into db:", err)
+                                        return
+                                    } else {
+                                        print("Successfully saved user info to db")
                                             
-                                            // GOTO: App
-                                            let loggedInVC = self.storyboard?.instantiateViewController(withIdentifier: "FeedVC")
-                                            self.present(loggedInVC!, animated: false, completion: nil)
-                                            }
+                                        // GOTO: App
+                                        let loggedInVC = self.storyboard?.instantiateViewController(withIdentifier: "FeedVC")
+                                        self.present(loggedInVC!, animated: false, completion: nil)
                                         }
-                                    )}
+                                    }
                                 )}
                             )}
                         }
