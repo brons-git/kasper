@@ -27,22 +27,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Include Firebase
         FirebaseApp.configure()
         
-        // Story Board
+        //DELETE
         let storyboard =  UIStoryboard(name: "Main", bundle: nil)
+        let loggedInVC = storyboard.instantiateViewController(withIdentifier: "MainVC")
+        self.window?.rootViewController = loggedInVC
         
-        // User is Logged In
-        if Auth.auth().currentUser != nil{
-            let loggedInVC = storyboard.instantiateViewController(withIdentifier: "FeedVC")
-            self.window?.rootViewController = loggedInVC
-            print("LOGIN STATUS/User is logged in.")
-        }
-        // User ISN'T Logged In
-        else
-        {
-            let loggedOutVC = storyboard.instantiateViewController(withIdentifier: "MainVC")
-            self.window?.rootViewController = loggedOutVC
-            print("LOGIN STATUS/User is NOT logged in.")
-        }
+//        // Story Board
+//        let storyboard =  UIStoryboard(name: "Main", bundle: nil)
+//
+//        // User is Logged In
+//        if Auth.auth().currentUser != nil{
+//            let loggedInVC = storyboard.instantiateViewController(withIdentifier: "FeedVC")
+//            self.window?.rootViewController = loggedInVC
+//            print("LOGIN STATUS/User is logged in.")
+//        }
+//        // User ISN'T Logged In
+//        else
+//        {
+//            let loggedOutVC = storyboard.instantiateViewController(withIdentifier: "MainVC")
+//            self.window?.rootViewController = loggedOutVC
+//            print("LOGIN STATUS/User is NOT logged in.")
+//        }
         return true
     }
 
