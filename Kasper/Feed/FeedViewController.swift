@@ -109,36 +109,38 @@ class FeedViewController: UIViewController {
             
             let snap = snapshot.value as? [String: Any]
             let friends = snap?.keys
-            for friend in friends! {
-                friends_array.append(friend)
-            }
-            
-            // get friends uids
-            for friend in friends_array {
-                Database.database().reference().child("uids").child(friend).observeSingleEvent(of: .value, with: { (snapshot) in
-                    let uuid = snapshot.value as? String
-                    friends_uids_array.append(uuid!)
-                    
-                    // check if friends are mutual
-                    for uuid in friends_uids_array {
-                        Database.database().reference().child("friend-lists").child(uuid).observeSingleEvent(of: .value, with: { (snapshot) in
-                            let snap = snapshot
-                            if snap.hasChild(self.myUsername) == true {
-                                if mutual_friends_array.contains(uuid) {
-                                    print("already has uuid in array")
-                                } else {
-                                    mutual_friends_array.append(uuid)
-                                    self.fetchPostsStepTwo(passing_uuid: uuid)
+            if friends != nil {
+                for friend in friends! {
+                    friends_array.append(friend)
+                }
+                
+                // get friends uids
+                for friend in friends_array {
+                    Database.database().reference().child("uids").child(friend).observeSingleEvent(of: .value, with: { (snapshot) in
+                        let uuid = snapshot.value as? String
+                        friends_uids_array.append(uuid!)
+                        
+                        // check if friends are mutual
+                        for uuid in friends_uids_array {
+                            Database.database().reference().child("friend-lists").child(uuid).observeSingleEvent(of: .value, with: { (snapshot) in
+                                let snap = snapshot
+                                if snap.hasChild(self.myUsername) == true {
+                                    if mutual_friends_array.contains(uuid) {
+                                        print("already has uuid in array")
+                                    } else {
+                                        mutual_friends_array.append(uuid)
+                                        self.fetchPostsStepTwo(passing_uuid: uuid)
+                                    }
                                 }
                             }
-                        }
-                    )}
-                }
-            )}
+                            )}
+                    }
+                )}
+            } else {
+                print("no friends to fetch posts from")
+            }
         }
     )}
-
-    // Fetch Posts
     func fetchPostsStepTwo(passing_uuid: String) {
         // Direct to database child
         print("1$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
