@@ -23,6 +23,7 @@ class FeedViewController: UIViewController {
     var users = [User]()
     var notifications = [Notifications]()
     var recentconvos = [RecentConvo]()
+    var myUsername = ""
     
     // Refresher
     var refresher: UIRefreshControl!
@@ -44,6 +45,7 @@ class FeedViewController: UIViewController {
         
         // Func calls
         banCheck()
+        getMyUsername()
         setupProPic()
         fetchPosts()
         fetchRemovals()
@@ -80,43 +82,113 @@ class FeedViewController: UIViewController {
         })
     }
     
+    //////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////
+
+    
+    
+    // Get My Username
+    func getMyUsername() {
+        let uid = Auth.auth().currentUser?.uid
+        Database.database().reference().child("users").child(uid!).child("username").observeSingleEvent(of: .value, with: { (snapshot) in
+            let username = snapshot.value as? String
+            self.myUsername = username!
+        }
+    )}
+    
     // Fetch Posts
     func fetchPosts() {
-        // Direct to database child
-        Database.database().reference().child("users_feed_posts").observe(.childAdded) { (snapshot: DataSnapshot) in
-                if let dict = snapshot.value as? [String: Any] {
+        var friends_array = [String]()
+        var friends_uids_array = [String]()
+        var mutual_friends_array = [String]()
+        
+        // get friends usernames
+        let uid = Auth.auth().currentUser?.uid
+        Database.database().reference().child("friend-lists").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let snap = snapshot.value as? [String: Any]
+            let friends = snap?.keys
+            for friend in friends! {
+                friends_array.append(friend)
+            }
+            
+            // get friends uids
+            for friend in friends_array {
+                Database.database().reference().child("uids").child(friend).observeSingleEvent(of: .value, with: { (snapshot) in
+                    let uuid = snapshot.value as? String
+                    friends_uids_array.append(uuid!)
                     
-                    // Retrieve Existing Data Stored "users_feed_posts"
-                    let postType = dict["postType"] as! String
-                    let idData = dict["id"] as! String
-                    let dateData = dict["date"] as! String
-                    let textPostData = dict["textPost"] as! String
-                    let imagePostData = dict["imagePost"] as! String
-                    
-                    // Fetch Username using existing "idData" from above
-                    Database.database().reference().child("users").child(idData).child("username").observeSingleEvent(of: .value, with: { (snapshot) in
-                        let usernameData = snapshot.value as? String
-                    
-                        // Fetch Rank using existing "idData" from above
-                        Database.database().reference().child("users").child(idData).child("rank").observeSingleEvent(of: .value, with: { (snapshot) in
-                            let rankData = snapshot.value as? String
-                            
-                            // Fetch ProPicRef using existing "idData" from above
-                            Database.database().reference().child("users").child(idData).child("propicref").observeSingleEvent(of: .value, with: { (snapshot) in
-                                let propicrefData = snapshot.value as? String
-                            
-                                // Add data to Post.swift model
-                                let postinfo = Post(postTypeString: postType, idString: idData, dateString: dateData, textPostString: textPostData, imagePostString: imagePostData, usernameString: usernameData!, rankString: rankData!, propicrefString: propicrefData!)
-                                self.posts.append(postinfo)
-                                
-                                // Reload Table with Data
-                                self.tableView.reloadData()
+                    // check if friends are mutual
+                    for uuid in friends_uids_array {
+                        Database.database().reference().child("friend-lists").child(uuid).observeSingleEvent(of: .value, with: { (snapshot) in
+                            let snap = snapshot
+                            if snap.hasChild(self.myUsername) == true {
+                                if mutual_friends_array.contains(uuid) {
+                                    print("already has uuid in array")
+                                } else {
+                                    mutual_friends_array.append(uuid)
+                                    self.fetchPostsStepTwo(passing_uuid: uuid)
+                                }
+                            }
                         }
                     )}
-                )}
+                }
             )}
         }
+    )}
+
+    // Fetch Posts
+    func fetchPostsStepTwo(passing_uuid: String) {
+        // Direct to database child
+        print("1$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        let passed_uuid = passing_uuid
+        print(passed_uuid)
+        Database.database().reference().child("users_profile_posts").child(passed_uuid).observe(.childAdded) { (snapshot: DataSnapshot) in
+                let dict = snapshot.value as? [String: Any]
+                print("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+                print(dict!)
+
+                // Retrieve Existing Data Stored "users_profile_posts"
+                let postType = dict!["postType"] as! String
+                let idData = dict!["id"] as! String
+                print("3$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+                print(idData)
+                let dateData = dict!["date"] as! String
+                let textPostData = dict!["textPost"] as! String
+                let imagePostData = dict!["imagePost"] as! String
+
+                // Fetch Username using existing "idData" from above
+                Database.database().reference().child("users").child(idData).child("username").observeSingleEvent(of: .value, with: { (snapshot) in
+                    let usernameData = snapshot.value as? String
+
+                    // Fetch Rank using existing "idData" from above
+                    Database.database().reference().child("users").child(idData).child("rank").observeSingleEvent(of: .value, with: { (snapshot) in
+                        let rankData = snapshot.value as? String
+
+                        // Fetch ProPicRef using existing "idData" from above
+                        Database.database().reference().child("users").child(idData).child("propicref").observeSingleEvent(of: .value, with: { (snapshot) in
+                            print("4$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+                            let propicrefData = snapshot.value as? String
+
+                            // Add data to Post.swift model
+                            let postinfo = Post(postTypeString: postType, idString: idData, dateString: dateData, textPostString: textPostData, imagePostString: imagePostData, usernameString: usernameData!, rankString: rankData!, propicrefString: propicrefData!)
+                            self.posts.append(postinfo)
+                            print("5$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+                            print(postinfo)
+
+                            // Reload Table with Data
+                            self.tableView.reloadData()
+                            print("6$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+                    }
+                )}
+            )}
+        )}
     }
+    
+    //////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////
     
     // Fetch Removals
     func fetchRemovals() {
