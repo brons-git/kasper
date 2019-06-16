@@ -91,18 +91,15 @@ class KPhotoPrevViewController: UIViewController {
                                             "textPost": "",
                                             "imagePost": downloadURL,
                                             "username": username] as [String : AnyObject]
-                        let values = [dateString: dictionary] as [String : AnyObject]
-                        Database.database().reference().child("users_feed_posts").updateChildValues(values, withCompletionBlock: { (err, ref) in
-                            let postDict = [dateString: dictionary] as [String : AnyObject]
-                            Database.database().reference().child("users_profile_posts").child(uid).updateChildValues(postDict, withCompletionBlock: { (err, ref) in
-                                if err != nil {
-                                    print("Error with upload!")
-                                } else {
-                                    print("Successfully saved post data to db")
-                                    self.dismiss(animated: false, completion: nil)
-                                }
+                        let postDict = [dateString: dictionary] as [String : AnyObject]
+                        Database.database().reference().child("users_profile_posts").child(uid).updateChildValues(postDict, withCompletionBlock: { (err, ref) in
+                            if err != nil {
+                                print("Error with upload!")
+                            } else {
+                                print("Successfully saved post data to db")
+                                self.dismiss(animated: false, completion: nil)
                             }
-                        )}
+                        }
                     )}
                 }
             }
