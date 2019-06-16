@@ -142,20 +142,13 @@ class FeedViewController: UIViewController {
         }
     )}
     func fetchPostsStepTwo(passing_uuid: String) {
-        // Direct to database child
-        print("1$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         let passed_uuid = passing_uuid
-        print(passed_uuid)
         Database.database().reference().child("users_profile_posts").child(passed_uuid).observe(.childAdded) { (snapshot: DataSnapshot) in
                 let dict = snapshot.value as? [String: Any]
-                print("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-                print(dict!)
 
                 // Retrieve Existing Data Stored "users_profile_posts"
                 let postType = dict!["postType"] as! String
                 let idData = dict!["id"] as! String
-                print("3$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-                print(idData)
                 let dateData = dict!["date"] as! String
                 let textPostData = dict!["textPost"] as! String
                 let imagePostData = dict!["imagePost"] as! String
@@ -170,27 +163,27 @@ class FeedViewController: UIViewController {
 
                         // Fetch ProPicRef using existing "idData" from above
                         Database.database().reference().child("users").child(idData).child("propicref").observeSingleEvent(of: .value, with: { (snapshot) in
-                            print("4$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
                             let propicrefData = snapshot.value as? String
 
                             // Add data to Post.swift model
                             let postinfo = Post(postTypeString: postType, idString: idData, dateString: dateData, textPostString: textPostData, imagePostString: imagePostData, usernameString: usernameData!, rankString: rankData!, propicrefString: propicrefData!)
                             self.posts.append(postinfo)
-                            print("5$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+                            
+                            // Sort Posts by Date
+                            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
                             print(postinfo)
+                            for post in self.posts {
+                                print(post.date)
+                            }
+                            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
 
                             // Reload Table with Data
                             self.tableView.reloadData()
-                            print("6$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
                     }
                 )}
             )}
         )}
     }
-    
-    //////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////
     
     // Fetch Removals
     func fetchRemovals() {
