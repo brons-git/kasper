@@ -207,6 +207,7 @@ class UserProfileViewController: UIViewController {
                             // Add data to Post.swift model
                             let postinfo = Post(postTypeString: postType, idString: idData, dateString: dateData, textPostString: textPostData, imagePostString: imagePostData, usernameString: usernameData!, rankString: rankData!, propicrefString: propicrefData!)
                             self.posts.append(postinfo)
+                            print(postinfo)
                             
                             // Reload Table with Data
                             self.tableView.reloadData()

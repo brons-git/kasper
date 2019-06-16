@@ -298,6 +298,22 @@ extension FeedViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath) as! PhotoTableViewCell
         let postsRe = Array(self.posts.reversed())
         
+        // Cell ProPic
+        let proPicRefe = postsRe[indexPath.row].propicref
+        let proPicUrlRefe:NSURL? = NSURL(string: proPicRefe)
+        if let proPicUrl = proPicUrlRefe as URL? {
+            cell.cellProfPic.sd_setImage(with: proPicUrl)
+            cell.cellProfPic.layer.cornerRadius = 20.0
+            cell.cellProfPic.clipsToBounds = true
+            let imagePostPicRefe = postsRe[indexPath.row].imagePost
+            let imagePostPicUrlRefe:NSURL? = NSURL(string: imagePostPicRefe)
+            if let imagePostPicUrl = imagePostPicUrlRefe as URL? {
+                cell.cellPostPhoto.sd_setImage(with: imagePostPicUrl)
+            }
+        } else {
+            print("error")
+        }
+        
         // Add @ Before Username
         cell.cellUsernameLabel.text = "@" + postsRe[indexPath.row].username
         
@@ -310,28 +326,6 @@ extension FeedViewController: UITableViewDataSource {
             cell.cellUsernameLabel.textColor = UIColor.cyan
         }
         
-        // Cell Data
-        Database.database().reference().child("users_feed_posts").observe(.childAdded) { (snapshot: DataSnapshot) in
-            if let dict = snapshot.value as? [String: Any] {
-                let postType = dict["postType"] as! String
-                if postType == "photo" {
-                    let proPicRefe = postsRe[indexPath.row].propicref
-                    let proPicUrlRefe:NSURL? = NSURL(string: proPicRefe)
-                    if let proPicUrl = proPicUrlRefe as URL? {
-                        cell.cellProfPic.sd_setImage(with: proPicUrl)
-                        cell.cellProfPic.layer.cornerRadius = 20.0
-                        cell.cellProfPic.clipsToBounds = true
-                        let imagePostPicRefe = postsRe[indexPath.row].imagePost
-                        let imagePostPicUrlRefe:NSURL? = NSURL(string: imagePostPicRefe)
-                        if let imagePostPicUrl = imagePostPicUrlRefe as URL? {
-                            cell.cellPostPhoto.sd_setImage(with: imagePostPicUrl)
-                        }
-                    } else {
-                        print("error")
-                    }
-                }
-            }
-        }
         return cell
     }
 }
