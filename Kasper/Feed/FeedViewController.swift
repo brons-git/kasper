@@ -162,14 +162,6 @@ class FeedViewController: UIViewController {
                             // Add data to Post.swift model
                             let postinfo = Post(postTypeString: postType, idString: idData, dateString: dateData, textPostString: textPostData, imagePostString: imagePostData, usernameString: usernameData!, rankString: rankData!, propicrefString: propicrefData!)
                             self.posts.append(postinfo)
-                            
-                            // Sort Posts by Date
-                            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-                            print(postinfo)
-                            for post in self.posts {
-                                print(post.date)
-                            }
-                            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
 
                             // Reload Table with Data
                             self.tableView.reloadData()
@@ -283,16 +275,18 @@ extension FeedViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath) as! PhotoTableViewCell
-        let postsRe = Array(self.posts.reversed())
+        
+        // Sort Posts by Date
+        let sorted_posts = posts.sorted(by: { $0.date > $1.date })
         
         // Cell ProPic
-        let proPicRefe = postsRe[indexPath.row].propicref
+        let proPicRefe = sorted_posts[indexPath.row].propicref
         let proPicUrlRefe:NSURL? = NSURL(string: proPicRefe)
         if let proPicUrl = proPicUrlRefe as URL? {
             cell.cellProfPic.sd_setImage(with: proPicUrl)
             cell.cellProfPic.layer.cornerRadius = 20.0
             cell.cellProfPic.clipsToBounds = true
-            let imagePostPicRefe = postsRe[indexPath.row].imagePost
+            let imagePostPicRefe = sorted_posts[indexPath.row].imagePost
             let imagePostPicUrlRefe:NSURL? = NSURL(string: imagePostPicRefe)
             if let imagePostPicUrl = imagePostPicUrlRefe as URL? {
                 cell.cellPostPhoto.sd_setImage(with: imagePostPicUrl)
@@ -302,10 +296,10 @@ extension FeedViewController: UITableViewDataSource {
         }
         
         // Add @ Before Username
-        cell.cellUsernameLabel.text = "@" + postsRe[indexPath.row].username
+        cell.cellUsernameLabel.text = "@" + sorted_posts[indexPath.row].username
         
         // ADMIN Cell
-        if postsRe[indexPath.row].rank == "redadmin" {
+        if sorted_posts[indexPath.row].rank == "redadmin" {
             cell.cellUsernameLabel.textColor = UIColor.red
         }
         // User Cell
