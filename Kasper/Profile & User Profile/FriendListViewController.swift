@@ -22,6 +22,9 @@ class FriendListViewController: UIViewController, UISearchBarDelegate {
     // Search Bar
     var displayedUsers = [User]()
     
+    // Refresher
+    var refresher: UIRefreshControl!
+    
     // Constants
     let uid = Auth.auth().currentUser?.uid
     
@@ -48,6 +51,13 @@ class FriendListViewController: UIViewController, UISearchBarDelegate {
         tableView.allowsSelection = true
         tableView.isEditing = false
         tableView.isUserInteractionEnabled = true
+        
+        // Refresher
+        refresher = UIRefreshControl()
+        refresher.tintColor = UIColor.cyan
+        refresher.attributedTitle = NSAttributedString(string: "refreshing...")
+        refresher.addTarget(self, action: #selector(FeedViewController.refresh), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refresher)
     }
     
     // Check if user is banned
@@ -116,7 +126,7 @@ class FriendListViewController: UIViewController, UISearchBarDelegate {
                                     }
                                 }
                             }
-                            )}
+                        )}
                     }
                     )}
             } else {
@@ -125,13 +135,10 @@ class FriendListViewController: UIViewController, UISearchBarDelegate {
         }
     )}
     func fetchFriendsStepTwo(passing_uuid: String) {
-        print("FLAG 1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         let passed_uuid = passing_uuid
         print(passed_uuid)
         Database.database().reference().child("users").child(passed_uuid).observeSingleEvent(of: .value, with: { (snapshot) in
-            print("FLAG 2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             if let dict = snapshot.value as? [String: Any] {
-                print("FLAG 3!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                 let idData = dict["id"] as! String
                 let emailData = dict["email"] as! String
                 let firstnameData = dict["firstname"] as! String
@@ -141,14 +148,10 @@ class FriendListViewController: UIViewController, UISearchBarDelegate {
                 let usernameData = dict["username"] as! String
                 let userinfo = User(idString: idData, emailString: emailData, firstnameString: firstnameData, lastnameString: lastnameData, propicrefString: propicrefData, rankString: rankData, usernameString: usernameData)
                 self.users.append(userinfo)
-                print("FLAG 4!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                 print(self.users)
                 self.displayedUsers = self.users
                 self.tableView.reloadData()
             } else {
-                print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-                print("~~~~~~~~~~~FOUND NIL~~~~~~~~~~~")
-                print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
             }
         }
     )}
@@ -185,59 +188,53 @@ extension FriendListViewController: UITableViewDelegate, UITableViewDataSource {
         return displayedUsers.count
     }
     
+    // Refresher
+    @objc func refresh()
+    {
+        print("WORKING")
+        print("WORKING")
+        print("WORKING")
+        print("WORKING")
+        print("WORKING")
+        refresher.endRefreshing()
+        tableView.reloadData()
+    }
+    
     // Table
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! PeopleVCTableViewCell
-        cell.isHidden = true
-        let uid = Auth.auth().currentUser?.uid
-        Database.database().reference().child("friend-lists").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
-            print(snapshot)
-            let friends = snapshot
-            print(type(of: snapshot))
-            let username = self.displayedUsers[indexPath.row].username
-            if friends.hasChild(username) == true {
-                print("FRIEND")
-                
-                // Selected Color
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = UIColor.black
-                cell.selectedBackgroundView = bgColorView
-                
-                // ADMIN
-                if self.displayedUsers[indexPath.row].rank == "admin" {
-                    cell.cellUsername.textColor = UIColor.red
-                    cell.cellFullname.textColor = UIColor.red
-                    cell.cellUsername.text = self.displayedUsers[indexPath.row].username
-                }
-                else {
-                    cell.cellUsername.textColor = UIColor.cyan
-                    cell.cellFullname.textColor = UIColor.gray
-                    cell.cellUsername.text = "@" + self.displayedUsers[indexPath.row].username
-                }
-                
-                // Cell Data
-                let proPicRefe = self.displayedUsers[indexPath.row].propicref
-                let proPicUrlRefe:NSURL? = NSURL(string: proPicRefe)
-                if let proPicUrl = proPicUrlRefe as URL? {
-                    cell.cellProPic.sd_setImage(with: proPicUrl)
-                    cell.cellProPic.layer.cornerRadius = 30.0
-                    cell.cellProPic.clipsToBounds = true
-                    let fname = self.displayedUsers[indexPath.row].firstname
-                    let lname = self.displayedUsers[indexPath.row].lastname
-                    let fullname = fname + " " + lname
-                    cell.cellFullname.text = fullname
-                }
-                // Show User Cell
-                cell.isHidden = false
-                self.tableView.rowHeight = 77.0
-            } else {
-                
-                // Remove User Cell (reason: not a friend)
-                print("NOT-FRIEND")
-                cell.isHidden = true
-                self.tableView.rowHeight = 0.0
-            }
-        })
+        
+        // Selected Color
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor.black
+        cell.selectedBackgroundView = bgColorView
+        
+        // Add @ Before Username
+        cell.cellUsername.text = "@" + displayedUsers[indexPath.row].username
+        
+        // ADMIN Cell
+        if displayedUsers[indexPath.row].rank == "redadmin" {
+            cell.cellUsername.textColor = UIColor.red
+            cell.cellFullname.textColor = UIColor.red
+        }
+            // User Cell
+        else {
+            cell.cellUsername.textColor = UIColor.cyan
+            cell.cellFullname.textColor = UIColor.gray
+        }
+        
+        // Cell Data
+        let proPicRefe = displayedUsers[indexPath.row].propicref
+        let proPicUrlRefe:NSURL? = NSURL(string: proPicRefe)
+        if let proPicUrl = proPicUrlRefe as URL? {
+            cell.cellProPic.sd_setImage(with: proPicUrl)
+            cell.cellProPic.layer.cornerRadius = 30.0
+            cell.cellProPic.clipsToBounds = true
+            let fname = displayedUsers[indexPath.row].firstname
+            let lname = displayedUsers[indexPath.row].lastname
+            let fullname = fname + " " + lname
+            cell.cellFullname.text = fullname
+        }
         return cell
     }
     
