@@ -17,6 +17,7 @@ class FriendListViewController: UIViewController, UISearchBarDelegate {
     
     // Variables
     var users = [User]()
+    var myUsername = ""
     
     // Search Bar
     var displayedUsers = [User]()
@@ -35,8 +36,8 @@ class FriendListViewController: UIViewController, UISearchBarDelegate {
         
         // Calling functions
         banCheck()
-        //setupProPic()
-        fetchUsers()
+        getMyUsername()
+        fetchFriends()
         fetchChanges()
         
         // Search Bar
@@ -70,25 +71,67 @@ class FriendListViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
     }
     
-    // Setup Profile Picture
-//    private func setupProPic() {
-//        Database.database().reference().child("users").child(uid!).child("propicref").observeSingleEvent(of: .value, with: { (snapshot) in
-//            print(snapshot)
-//            let proPicRefe = snapshot.value as? String
-//            let proPicUrlRefe:NSURL? = NSURL(string: proPicRefe!)
-//            if let proPicUrl = proPicUrlRefe as URL? {
-//                self.profilePic.sd_setImage(with: proPicUrl)
-//                self.profilePic.layer.cornerRadius = 20.0
-//                self.profilePic.clipsToBounds = true
-//            }
-//        })
-//    }
+    // Get My Username
+    func getMyUsername() {
+        let uid = Auth.auth().currentUser?.uid
+        Database.database().reference().child("users").child(uid!).child("username").observeSingleEvent(of: .value, with: { (snapshot) in
+            let username = snapshot.value as? String
+            self.myUsername = username!
+        }
+    )}
     
-    // Fetch Users
-    func fetchUsers() {
-        Database.database().reference().child("users").observe(.childAdded) { (snapshot: DataSnapshot) in
+    // Fetch Friends
+    func fetchFriends() {
+        var friends_array = [String]()
+        var friends_uids_array = [String]()
+        var mutual_friends_array = [String]()
+        
+        // get friends usernames
+        let uid = Auth.auth().currentUser?.uid
+        Database.database().reference().child("friend-lists").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let snap = snapshot.value as? [String: Any]
+            let friends = snap?.keys
+            if friends != nil {
+                for friend in friends! {
+                    friends_array.append(friend)
+                }
+                
+                // get friends uids
+                for friend in friends_array {
+                    Database.database().reference().child("uids").child(friend).observeSingleEvent(of: .value, with: { (snapshot) in
+                        let uuid = snapshot.value as? String
+                        friends_uids_array.append(uuid!)
+                        
+                        // check if friends are mutual
+                        for uuid in friends_uids_array {
+                            Database.database().reference().child("friend-lists").child(uuid).observeSingleEvent(of: .value, with: { (snapshot) in
+                                let snap = snapshot
+                                if snap.hasChild(self.myUsername) == true {
+                                    if mutual_friends_array.contains(uuid) {
+                                        print("already has uuid in array")
+                                    } else {
+                                        mutual_friends_array.append(uuid)
+                                        self.fetchFriendsStepTwo(passing_uuid: uuid)
+                                    }
+                                }
+                            }
+                            )}
+                    }
+                    )}
+            } else {
+                print("no friends to fetch")
+            }
+        }
+    )}
+    func fetchFriendsStepTwo(passing_uuid: String) {
+        print("FLAG 1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        let passed_uuid = passing_uuid
+        print(passed_uuid)
+        Database.database().reference().child("users").child(passed_uuid).observeSingleEvent(of: .value, with: { (snapshot) in
+            print("FLAG 2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             if let dict = snapshot.value as? [String: Any] {
-                print(dict)
+                print("FLAG 3!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                 let idData = dict["id"] as! String
                 let emailData = dict["email"] as! String
                 let firstnameData = dict["firstname"] as! String
@@ -98,12 +141,17 @@ class FriendListViewController: UIViewController, UISearchBarDelegate {
                 let usernameData = dict["username"] as! String
                 let userinfo = User(idString: idData, emailString: emailData, firstnameString: firstnameData, lastnameString: lastnameData, propicrefString: propicrefData, rankString: rankData, usernameString: usernameData)
                 self.users.append(userinfo)
+                print("FLAG 4!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                 print(self.users)
                 self.displayedUsers = self.users
                 self.tableView.reloadData()
+            } else {
+                print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                print("~~~~~~~~~~~FOUND NIL~~~~~~~~~~~")
+                print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
             }
         }
-    }
+    )}
     
     // Fetch Removals
     func fetchRemovals() {
