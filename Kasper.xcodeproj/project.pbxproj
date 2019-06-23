@@ -811,10 +811,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2GC66MC5SA;
+				DEVELOPMENT_TEAM = 52CW9UXXD8;
 				INFOPLIST_FILE = Kasper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = kasper.89sx89u7221ae;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kasper.89sx89u7221ae;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -827,10 +827,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2GC66MC5SA;
+				DEVELOPMENT_TEAM = 52CW9UXXD8;
 				INFOPLIST_FILE = Kasper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = kasper.89sx89u7221ae;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kasper.89sx89u7221ae;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
