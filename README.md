@@ -1,4 +1,4 @@
-Kasper - Social Communications
+Kasper - Encrypted Social Communications
 
 [app description]
 
