@@ -19,8 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Application Did Finish Launching
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Status Bar Style
-        UIApplication.shared.statusBarStyle = .lightContent
         // Window Frame
         self.window = UIWindow(frame: UIScreen.main.bounds)
         

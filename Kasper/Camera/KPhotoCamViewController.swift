@@ -40,6 +40,9 @@ class KPhotoCamViewController: UIViewController, AVCaptureVideoDataOutputSampleB
     // Take Photo
     var takePhoto = false
     
+    // Camera Flash
+    var flash_status = false
+    
     // View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,7 +154,7 @@ class KPhotoCamViewController: UIViewController, AVCaptureVideoDataOutputSampleB
             //see available types
             //print("\(vFormat) \n")
             
-            var ranges = vFormat.videoSupportedFrameRateRanges as [AVFrameRateRange]
+            let ranges = vFormat.videoSupportedFrameRateRanges as [AVFrameRateRange]
             let frameRates = ranges[0]
             
             do {
@@ -172,11 +175,31 @@ class KPhotoCamViewController: UIViewController, AVCaptureVideoDataOutputSampleB
         }
     }
     
+    // Camera Flash
+    @IBAction func didTouchFlashButton(_ sender: Any) {
+        if let avDevice = AVCaptureDevice.default(for: AVMediaType.video) {
+            if (avDevice.hasTorch) {
+                do {
+                    try avDevice.lockForConfiguration()
+                } catch {
+                    print("aaaa")
+                }
+                
+                if avDevice.isTorchActive {
+                    avDevice.torchMode = AVCaptureDevice.TorchMode.off
+                } else {
+                    avDevice.torchMode = AVCaptureDevice.TorchMode.on
+                }
+            }
+            // unlock your device
+            avDevice.unlockForConfiguration()
+        }
+    }
+    
     // Take Photo
     @IBAction func takePhoto(_ sender: Any) {
         takePhoto = true
     }
-    
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if takePhoto {
             takePhoto = false
@@ -191,8 +214,6 @@ class KPhotoCamViewController: UIViewController, AVCaptureVideoDataOutputSampleB
             
         }
     }
-    
-    // Get Image from Sample Buffer
     func getImageFromSampleBuffer(buffer: CMSampleBuffer) -> UIImage? {
         if let pixelBuffer = CMSampleBufferGetImageBuffer(buffer) {
             let ciImage = CIImage(cvPixelBuffer: pixelBuffer)

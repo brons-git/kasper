@@ -3017,6 +3017,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHr-qz-BEf">
                                 <rect key="frame" x="319" y="24" width="40" height="40"/>
                                 <state key="normal" image="CameraFlashBTN"/>
+                                <connections>
+                                    <action selector="didTouchFlashButton:" destination="8TD-HR-DJO" eventType="touchUpInside" id="MrU-Wk-VvU"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Arq-Cg-PhV">
                                 <rect key="frame" x="319" y="627" width="40" height="40"/>
