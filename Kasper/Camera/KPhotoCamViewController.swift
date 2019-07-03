@@ -182,7 +182,7 @@ class KPhotoCamViewController: UIViewController, AVCaptureVideoDataOutputSampleB
                 do {
                     try avDevice.lockForConfiguration()
                 } catch {
-                    print("aaaa")
+                    print("Camera flash not working...")
                 }
                 
                 if avDevice.isTorchActive {
