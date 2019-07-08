@@ -46,7 +46,6 @@ class NotificationsViewController: UIViewController {
         // Refresher
         refresher = UIRefreshControl()
         refresher.tintColor = UIColor.cyan
-        refresher.attributedTitle = NSAttributedString(string: "refreshing...")
         refresher.addTarget(self, action: #selector(FeedViewController.refresh), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresher)
     }
@@ -224,11 +223,6 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
     // Refresher
     @objc func refresh()
     {
-        print("WORKING")
-        print("WORKING")
-        print("WORKING")
-        print("WORKING")
-        print("WORKING")
         refresher.endRefreshing()
         tableView.reloadData()
     }

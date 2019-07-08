@@ -326,14 +326,16 @@
 		23A4F8862073CB6500C4B685 /* Kasper */ = {
 			isa = PBXGroup;
 			children = (
+				23A1406321672A1100FF9AE7 /* Storyboard */,
+				23ECD8DF22D30F26004058FE /* Scripts */,
+				2378265220E0482000541C5A /* Data Models */,
+				23A1405C2167293600FF9AE7 /* Table View Cells */,
 				230A3B77207EE27800FF0FD7 /* Kasper.entitlements */,
 				23A4F88E2073CB6500C4B685 /* Assets.xcassets */,
 				23A4F8872073CB6500C4B685 /* AppDelegate.swift */,
 				23A4F8892073CB6500C4B685 /* ViewController.swift */,
 				2367470E20E23232004F985A /* GoogleService-Info.plist */,
 				23A4F8932073CB6500C4B685 /* Info.plist */,
-				23A1406321672A1100FF9AE7 /* Storyboard */,
-				2378265220E0482000541C5A /* Data Models */,
 				23A14059216728AC00FF9AE7 /* Main */,
 				23A140542167284D00FF9AE7 /* Feed */,
 				23A140552167285700FF9AE7 /* People */,
@@ -345,7 +347,6 @@
 				231C419D217074BC0016B7EE /* Pop Ups */,
 				23A1405B2167291300FF9AE7 /* Admin */,
 				235B01D4229DA830001D8085 /* Posting */,
-				23A1405C2167293600FF9AE7 /* Table View Cells */,
 			);
 			path = Kasper;
 			sourceTree = "<group>";
@@ -357,6 +358,14 @@
 				23A4F89E2073CB6500C4B685 /* Info.plist */,
 			);
 			path = KasperTests;
+			sourceTree = "<group>";
+		};
+		23ECD8DF22D30F26004058FE /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Scripts;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		862166EC9F71C90626A4AC9C /* Frameworks */ = {
