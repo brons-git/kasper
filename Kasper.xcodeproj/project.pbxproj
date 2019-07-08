@@ -327,7 +327,6 @@
 			isa = PBXGroup;
 			children = (
 				23A1406321672A1100FF9AE7 /* Storyboard */,
-				23ECD8DF22D30F26004058FE /* Scripts */,
 				2378265220E0482000541C5A /* Data Models */,
 				23A1405C2167293600FF9AE7 /* Table View Cells */,
 				230A3B77207EE27800FF0FD7 /* Kasper.entitlements */,
@@ -358,14 +357,6 @@
 				23A4F89E2073CB6500C4B685 /* Info.plist */,
 			);
 			path = KasperTests;
-			sourceTree = "<group>";
-		};
-		23ECD8DF22D30F26004058FE /* Scripts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Scripts;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		862166EC9F71C90626A4AC9C /* Frameworks */ = {
