@@ -24,6 +24,7 @@
 		235DCBE72079C7D0003FAA85 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DCBE62079C7D0003FAA85 /* MainViewController.swift */; };
 		235DCC08207C5704003FAA85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 235DCC07207C5704003FAA85 /* Main.storyboard */; };
 		2367470F20E23232004F985A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2367470E20E23232004F985A /* GoogleService-Info.plist */; };
+		236F612322D39545006FC474 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236F612222D39545006FC474 /* Reachability.swift */; };
 		2378265120DF4C9200541C5A /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2378265020DF4C9200541C5A /* UserProfileViewController.swift */; };
 		2378265720E0799400541C5A /* PeopleVCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2378265520E0799400541C5A /* PeopleVCTableViewCell.swift */; };
 		2378265820E0799400541C5A /* PeopleVCTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2378265620E0799400541C5A /* PeopleVCTableViewCell.xib */; };
@@ -80,6 +81,7 @@
 		235DCBE62079C7D0003FAA85 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		235DCC07207C5704003FAA85 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2367470E20E23232004F985A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		236F612222D39545006FC474 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		2378265020DF4C9200541C5A /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		2378265520E0799400541C5A /* PeopleVCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleVCTableViewCell.swift; sourceTree = "<group>"; };
 		2378265620E0799400541C5A /* PeopleVCTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PeopleVCTableViewCell.xib; sourceTree = "<group>"; };
@@ -189,6 +191,14 @@
 				2313A7B32091400E0095511C /* PostPhotoViewController.swift */,
 			);
 			path = Posting;
+			sourceTree = "<group>";
+		};
+		236F612122D39516006FC474 /* Global Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				236F612222D39545006FC474 /* Reachability.swift */,
+			);
+			path = "Global Scripts";
 			sourceTree = "<group>";
 		};
 		2378265220E0482000541C5A /* Data Models */ = {
@@ -327,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				23A1406321672A1100FF9AE7 /* Storyboard */,
+				236F612122D39516006FC474 /* Global Scripts */,
 				2378265220E0482000541C5A /* Data Models */,
 				23A1405C2167293600FF9AE7 /* Table View Cells */,
 				230A3B77207EE27800FF0FD7 /* Kasper.entitlements */,
@@ -659,6 +670,7 @@
 				235DCBE120780B59003FAA85 /* RecoverPasswordViewController.swift in Sources */,
 				23A1404E216595EA00FF9AE7 /* ControlPanelViewController.swift in Sources */,
 				231C419A217056100016B7EE /* Conversation.swift in Sources */,
+				236F612322D39545006FC474 /* Reachability.swift in Sources */,
 				231C419C217074B70016B7EE /* PopUpMsgUsrViewController.swift in Sources */,
 				2313A7B42091400E0095511C /* PostPhotoViewController.swift in Sources */,
 				23A14052216727A900FF9AE7 /* NotificationsViewController.swift in Sources */,
