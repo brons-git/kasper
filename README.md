@@ -2,6 +2,8 @@ Kasper - Encrypted Social Communications
 
 [app description]
 
+[app img] [app img] [app gif]
+
 -----------------------------------------------------------------------------------------------------------
 
 Terms of Service
