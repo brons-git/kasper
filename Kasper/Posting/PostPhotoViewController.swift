@@ -54,7 +54,6 @@ class PostPhotoViewController: UIViewController, UITextFieldDelegate, UIImagePic
         imagePicker.dismiss(animated: true, completion: nil)
     }
     @IBAction func selectedImgPicker (_ sender: AnyObject) {
-        
         present(imagePicker, animated: true, completion: nil)
     }
     
